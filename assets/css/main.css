@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
    font-family: "Kalameh";
    src: url('../fonts/Kalameh/Farsi_Numerals/WebFonts/fonts/woff2/KalamehWebFaNum-Regular.woff2');

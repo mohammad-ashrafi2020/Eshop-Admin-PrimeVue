@@ -5,6 +5,12 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   modules: ["@primevue/nuxt-module"],
   css: ["~/assets/css/main.css"],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   primevue: {
     options: {
       theme: {

@@ -13,11 +13,15 @@
     "@primevue/themes": "^4.1.1",
     "nuxt": "^3.13.0",
     "primevue": "^4.1.1",
+    "tailwindcss-primeui": "^0.3.4",
     "vue": "latest",
     "vue-router": "latest"
   },
   "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447",
   "devDependencies": {
-    "@primevue/nuxt-module": "^4.1.1"
+    "@primevue/nuxt-module": "^4.1.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14"
   }
 }
