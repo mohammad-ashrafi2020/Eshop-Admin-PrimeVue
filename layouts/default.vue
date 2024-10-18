@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="py-4 px-5 bg-surface-700"></header>
+    <TheHeader />
     <main>
       <div>
         <slot />
