@@ -1,16 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import Lara from "@primevue/themes/lara";
+import Lara from "@primevue/themes/aura";
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: false },
   modules: ["@primevue/nuxt-module"],
+  css: ["~/assets/css/main.css"],
   primevue: {
-    /* Configuration */
     options: {
       theme: {
         preset: Lara,
+        options: {
+          darkModeSelector: "light",
+        },
       },
-      ripple:true
     },
   },
 });

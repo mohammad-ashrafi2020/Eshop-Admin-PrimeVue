@@ -1,0 +1,10 @@
+@font-face {
+   font-family: "Kalameh";
+   src: url('../fonts/Kalameh/Farsi_Numerals/WebFonts/fonts/woff2/KalamehWebFaNum-Regular.woff2');
+}
+
+body {
+   direction: rtl;
+   text-align: right;
+   font-family: "Kalameh";
+}

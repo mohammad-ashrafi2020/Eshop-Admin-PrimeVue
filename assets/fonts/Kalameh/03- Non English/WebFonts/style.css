@@ -1,0 +1,67 @@
+﻿@import url(fontiran.css); /* لینک فایلی که وظیفه بارگذاری فونت‌ها را برعهده دارد */
+body {
+	font-family: KalamehWebNoEn !important;
+	direction: rtl;
+	background-color: #cdcdcd;
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: KalamehWebNoEn !important;
+}
+
+.wrapper {
+	max-width: 900px;
+	margin: 20px auto;
+	padding: 30px;
+	background-color: #fff;
+	border-radius: 15px;
+	box-shadow: 0 0 10px #aaa;
+}
+
+.box100 p, .box200 p, .box300 p, .box400 p, .box500 p, .box600 p, .box700 p, .box800 p, .box900 p{
+	font-size: 20px;
+	margin: 0;
+}
+
+.box100, .box100 h1, .box200, .box200 h1, .box300, .box300 h1, .box400, .box400 h1, .box500, .box500 h1, .box600, .box600 h1, .box700, .box700 h1, .box800, .box800 h1, .box900, .box900 h1{
+  	margin: 30px 0 0 0;
+	font-size: 25px;
+}
+
+
+.box100, .box100 h1{
+	font-weight:100;
+}
+
+.box200, .box200 h1{
+	font-weight:200;
+}
+
+.box300, .box300 h1{
+	font-weight:300;
+}
+
+.box400, .box400 h1{
+	font-weight:400;
+}
+
+.box500, .box500 h1{
+	font-weight:500;
+}
+
+.box600, .box600 h1{
+	font-weight:600;
+}
+
+.box700, .box700 h1{
+	font-weight:700;
+}
+
+.box800, .box800 h1{
+	font-weight:800;
+}
+
+.box900, .box900 h1{
+	font-weight:900;
+}
