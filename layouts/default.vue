@@ -36,6 +36,7 @@ const home = {
 };
 const items: Ref<any[]> = ref([]);
 watch(() => route.path, () => {
+  items.value = [];
   if (route.meta.bread) {
     items.value = route.meta.bread as [];
   } else if (route.meta.title) {
@@ -44,8 +45,6 @@ watch(() => route.path, () => {
         label: route.meta.title
       }
     ];
-  } else {
-    items.value = [];
   }
 })
 onMounted(() => {
