@@ -7,6 +7,11 @@
         <Column field="family" header="نام خانوادگی"></Column>
         <Column field="email" header="ایمیل"></Column>
         <Column field="phoneNumber" header="شماره تلفن"></Column>
+        <template #footer>
+          <div class="flex w-full justify-center items-center">
+            <BasePagination />
+          </div>
+        </template>
       </DataTable>
     </div>
   </div>
