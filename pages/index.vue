@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Button label="سلام"/>
+    <DashboardTopBar />
   </div>
 </template>
 

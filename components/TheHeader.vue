@@ -10,7 +10,7 @@
       <Button v-if="isDarkMode" @click="isDarkMode = !isDarkMode" severity="secondary" icon="pi pi-sun"
         aria-label="sun" />
       <Button v-else @click="isDarkMode = !isDarkMode" severity="secondary" icon="pi pi-moon" aria-label="moon" />
-      <Button severity="secondary" icon="pi pi-home" aria-label="home" />
+      <Button @click="$router.push('/auth')" severity="secondary" icon="pi pi-home" aria-label="home" />
     </div>
   </header>
 </template>
