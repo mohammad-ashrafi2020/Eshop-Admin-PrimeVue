@@ -5,7 +5,13 @@
 </template>
 
 <script lang="ts" setup>
+import { CustomFetch } from '~/utils/CustomFetch';
 
+
+onMounted(async () => {
+  var result = await CustomFetch<any[]>("/Banner");
+  console.log(result.data[0])
+})
 </script>
 
 <style></style>
