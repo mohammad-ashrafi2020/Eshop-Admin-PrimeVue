@@ -9,36 +9,44 @@
         </svg>
         <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">خوش آمدید</div>
       </div>
-      <div>
+      <form @submit.prevent="signIn">
         <label for="email1" class="text-surface-900 dark:text-surface-0 font-medium mb-2 block">شماره تلفن</label>
-        <InputText id="email1" type="text" placeholder="شماره تلفن" class="w-full mb-4" />
+        <InputText v-model="phoneNumber" type="text" placeholder="شماره تلفن" class="w-full mb-4" />
 
         <label for="password1" class="text-surface-900 dark:text-surface-0 font-medium mb-2 block">کلمه عبور</label>
-        <InputText id="password1" type="password" placehoder="کلمه عبور را وارد کنید" class="w-full mb-4" />
+        <InputText v-model="password" type="password" placehoder="کلمه عبور را وارد کنید" class="w-full mb-4" />
 
         <div class="flex items-center justify-between mb-5">
           <a class="font-medium no-underline ml-2 text-primary text-right cursor-pointer">کلمه عبور را فراموش کرده اید
             ؟</a>
         </div>
 
-        <Button @click="signIn" label="ورود" icon="pi pi-user" class="w-full" />
-      </div>
+        <Button type="submit" label="ورود" icon="pi pi-user" class="w-full" />
+      </form>
     </div>
   </div>
 </template>
 <script setup>
-import Button from 'primevue/button';
-import Checkbox from 'primevue/checkbox';
-import InputText from 'primevue/inputtext';
+import { Login } from '~/services/auth.service';
 
-import { ref } from 'vue';
-
-const checked1 = ref(true);
 const router = useRouter();
-const signIn = () => {
-  router.push('/');
+const phoneNumber = ref('');
+const password = ref('');
+
+const signIn = async () => {
+  var result = await Login(phoneNumber.value, password.value);
+  if (result.isSuccess) {
+    if (result.data.isAdmin) {
+      router.push('/');
+    } else {
+      alert("شما ادمین نیستید.")
+    }
+  } else {
+    alert(result.metaData.message)
+  }
 }
 definePageMeta({
   layout: 'auth'
-})
+});
+
 </script>
