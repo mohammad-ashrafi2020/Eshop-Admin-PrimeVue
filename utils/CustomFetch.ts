@@ -52,7 +52,7 @@ export function CustomFetch<T>(
       switch (e.response.status) {
         case 400: {
           customResponse.metaData.message =
-            e.response._data?.MetaData?.Message ?? "اطلاعات نامعتبر است";
+            e.response._data?.metaData?.message ?? "اطلاعات نامعتبر است";
           break;
         }
         case 401: {
