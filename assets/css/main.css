@@ -13,6 +13,12 @@ body {
    font-family: "Kalameh";
    background: #F7FAFF;
 }
-.p-datatable-tbody > tr > td{
+
+.p-datatable-tbody>tr>td {
    text-align: right !important;
+}
+
+.p-toast-close-button {
+   right: unset !important;
+   left: -25%;
 }

@@ -32,17 +32,19 @@ import { Login } from '~/services/auth.service';
 const router = useRouter();
 const phoneNumber = ref('');
 const password = ref('');
-
+const toast = useToast();
 const signIn = async () => {
   var result = await Login(phoneNumber.value, password.value);
   if (result.isSuccess) {
     if (result.data.isAdmin) {
       router.push('/');
     } else {
-      alert("شما ادمین نیستید.")
+      toast.add({
+        summary: 'خطا',
+        detail: "شما ادمین نیستید.",
+        severity:'error'
+      })
     }
-  } else {
-    alert(result.metaData.message)
   }
 }
 definePageMeta({

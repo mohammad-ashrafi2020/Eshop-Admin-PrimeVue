@@ -1,10 +1,12 @@
 <template>
   <div>
     <DashboardTopBar />
+
   </div>
 </template>
 
 <script lang="ts" setup>
+import { useAccountStore } from '~/stores/account.store';
 import { CustomFetch } from '~/utils/CustomFetch';
 
 
