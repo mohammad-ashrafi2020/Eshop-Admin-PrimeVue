@@ -9,8 +9,8 @@
         </svg>
         <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">خوش آمدید</div>
       </div>
-      <h1>Is Login = {{ accountStore.getToken != undefined }}</h1>
-      <form @submit.prevent="signIn">
+
+      <form @submit.prevent="signIn" :class="{ 'card-loading': loading }">
         <label for="email1" class="text-surface-900 dark:text-surface-0 font-medium mb-2 block">شماره تلفن</label>
         <InputText v-model="phoneNumber" type="text" placeholder="شماره تلفن" class="w-full mb-4" />
 
@@ -22,7 +22,7 @@
             ؟</a>
         </div>
 
-        <Button type="submit" label="ورود" icon="pi pi-user" class="w-full" />
+        <Button :loading="loading" type="submit" label="ورود" icon="pi pi-user" class="w-full" />
       </form>
     </div>
   </div>
@@ -36,12 +36,17 @@ const router = useRouter();
 const phoneNumber = ref('');
 const password = ref('');
 const toast = useToast();
+const loading = ref(false);
 const signIn = async () => {
+  loading.value=true;
   var result = await Login(phoneNumber.value, password.value);
+  loading.value=false;
   if (result.isSuccess) {
     if (result.data.isAdmin) {
       accountStore.setAuthToken(result.data);
-      router.push('/');
+      setTimeout(() => {
+        router.push('/');
+      }, 200);
     } else {
       toast.add({
         summary: 'خطا',

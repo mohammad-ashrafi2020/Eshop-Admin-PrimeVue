@@ -12,8 +12,8 @@ import { CustomFetch } from '~/utils/CustomFetch';
 
 onMounted(async () => {
   var result = await CustomFetch<any[]>("/Order");
-  console.log(result.data[0])
-})
+});
+
 </script>
 
 <style></style>
