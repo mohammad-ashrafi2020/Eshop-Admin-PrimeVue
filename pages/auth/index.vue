@@ -9,6 +9,7 @@
         </svg>
         <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">خوش آمدید</div>
       </div>
+      <h1>Is Login = {{ accountStore.getToken != undefined }}</h1>
       <form @submit.prevent="signIn">
         <label for="email1" class="text-surface-900 dark:text-surface-0 font-medium mb-2 block">شماره تلفن</label>
         <InputText v-model="phoneNumber" type="text" placeholder="شماره تلفن" class="w-full mb-4" />
@@ -28,7 +29,9 @@
 </template>
 <script setup>
 import { Login } from '~/services/auth.service';
+import { useAccountStore } from '~/stores/account.store';
 
+const accountStore = useAccountStore();
 const router = useRouter();
 const phoneNumber = ref('');
 const password = ref('');
@@ -37,12 +40,13 @@ const signIn = async () => {
   var result = await Login(phoneNumber.value, password.value);
   if (result.isSuccess) {
     if (result.data.isAdmin) {
+      accountStore.setAuthToken(result.data);
       router.push('/');
     } else {
       toast.add({
         summary: 'خطا',
         detail: "شما ادمین نیستید.",
-        severity:'error'
+        severity: 'error'
       })
     }
   }

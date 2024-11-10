@@ -14,7 +14,13 @@ export function CustomFetch<T>(
     retry: 0,
   };
   const accountStore = useAccountStore();
-
+  if (accountStore.isLogin) {
+    if (!newConfig.headers) {
+      newConfig.headers = {};
+    }
+    //@ts-ignore
+    newConfig.headers["authorization"] = `Bearer ${accountStore.getToken!}`;
+  }
   const shoError = (data: ApiResponse<any>) => {
     if (process.client) {
       if (data.metaData.appStatusCode == AppStatusCode.NotFound) {
@@ -33,7 +39,7 @@ export function CustomFetch<T>(
   //@ts-ignore
   return $fetch<ApiResponse<T>>(url, newConfig)
     .then((response) => {
-      if(response.isSuccess==false){
+      if (response.isSuccess == false) {
         shoError(response);
       }
       return response;
