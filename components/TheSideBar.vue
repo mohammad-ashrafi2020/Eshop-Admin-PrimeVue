@@ -5,6 +5,10 @@
         <i class="pi pi-book"></i>
         داشبورد
       </NuxtLink>
+      <NuxtLink to="/banners" class="link">
+        <i class="pi pi-images"></i>
+        مدیریت بنر ها
+      </NuxtLink>
       <NuxtLink to="/users" class="link">
         <i class="pi pi-users"></i>
         مدیریت کاربران

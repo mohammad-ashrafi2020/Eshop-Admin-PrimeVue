@@ -3,13 +3,14 @@ import type { FetchConfig } from "~/models/config/fetchConfig";
 import type { FetchError } from "~/models/FetchError";
 import { useToast } from "primevue/usetoast";
 import { useAccountStore } from "~/stores/account.store";
+import { BASE_URL } from "./EnvironmentVariables";
 
 export function CustomFetch<T>(
   url: string,
   config: FetchConfig | undefined = {}
 ): Promise<ApiResponse<T>> {
   var newConfig: FetchConfig = {
-    baseURL: "https://shop-api.codeyad-project.ir/api",
+    baseURL: BASE_URL + "/api",
     ...config,
     retry: 0,
   };
