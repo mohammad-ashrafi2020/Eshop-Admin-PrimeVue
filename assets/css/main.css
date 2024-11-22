@@ -3,22 +3,29 @@
 @tailwind utilities;
 
 @font-face {
-   font-family: "Kalameh";
-   src: url('../fonts/Kalameh/Farsi_Numerals/WebFonts/fonts/woff2/KalamehWebFaNum-Regular.woff2');
+  font-family: "Kalameh";
+  src: url("../fonts/Kalameh/Farsi_Numerals/WebFonts/fonts/woff2/KalamehWebFaNum-Regular.woff2");
 }
 
 body {
-   direction: rtl;
-   text-align: right;
-   font-family: "Kalameh";
-   background: #F7FAFF;
+  direction: rtl;
+  text-align: right;
+  font-family: "Kalameh";
+  background: #f7faff;
 }
 
-.p-datatable-tbody>tr>td {
-   text-align: right !important;
+.p-datatable-tbody > tr > td {
+  text-align: right !important;
 }
 
 .p-toast-close-button {
-   right: unset !important;
-   left: -25%;
+  right: unset !important;
+  left: -25%;
+}
+.p-floatlabel {
+  width: fit-content;
+}
+.p-floatlabel label {
+  left: unset !important;
+  right: var(--p-floatlabel-position-x);
 }
