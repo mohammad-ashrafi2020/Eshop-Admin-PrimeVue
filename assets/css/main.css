@@ -23,9 +23,11 @@ body {
   left: -25%;
 }
 .p-floatlabel {
-  width: fit-content;
 }
 .p-floatlabel label {
   left: unset !important;
   right: var(--p-floatlabel-position-x);
+}
+.card-body{
+  @apply bg-white p-5 rounded
 }

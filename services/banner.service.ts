@@ -1,7 +1,19 @@
 import type { Banner } from "~/models/banners/Banner";
+import type { CreateBannerCommand } from "~/models/banners/CreateBannerCommand";
 import { CustomFetch } from "~/utils/CustomFetch";
 
 export const GetBanners = () => {
-   
   return CustomFetch<Banner[]>("/Banner");
+};
+export const CreateBanner = (command: CreateBannerCommand) => {
+  var data = new FormData();
+
+  data.append("Link", command.link);
+  data.append("ImageFile", command.imageFile);
+  data.append("Position", command.position.toString());
+
+  return CustomFetch("/Banner", {
+    method: "POST",
+    body: data,
+  });
 };

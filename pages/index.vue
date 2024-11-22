@@ -5,8 +5,6 @@
       <BaseInputText name="name" label="نام" v-model="name" />
       <Button type="submit">ثبت</Button>
     </Form>
-    {{ name }}
-
   </div>
 </template>
 

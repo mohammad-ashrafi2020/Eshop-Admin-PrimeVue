@@ -1093,6 +1093,13 @@
     "@parcel/watcher-win32-ia32" "2.4.1"
     "@parcel/watcher-win32-x64" "2.4.1"
 
+"@persian-tools/persian-tools@^3.5.2":
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@persian-tools/persian-tools/-/persian-tools-3.5.2.tgz#9247fd02eae9bdfcbae27e18b1cb8c8380e49799"
+  integrity sha512-m5pRaVNYIMfe5S+f1Y+mX4ULgk9SLhfv5zkT80xo9c31rQEZ25OEl3WZqHmmVSXSfSXS6jDizW4qjysaqsC7cw==
+  dependencies:
+    fastest-levenshtein "^1.0.16"
+
 "@pinia/nuxt@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@pinia/nuxt/-/nuxt-0.7.0.tgz#dd9342eb4422eeda638f3248537fcc9cb430cf91"
@@ -2739,6 +2746,11 @@ fast-npm-meta@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/fast-npm-meta/-/fast-npm-meta-0.2.2.tgz#619e4ab6b71f4ce19d9fad48bba6ffa8164b7361"
   integrity sha512-E+fdxeaOQGo/CMWc9f4uHFfgUPJRAu7N3uB8GBvB3SDPAIWJK4GKyYhkAGFq+GYrcbKNfQIz5VVQyJnDuPPCrg==
+
+fastest-levenshtein@^1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/fastest-levenshtein/-/fastest-levenshtein-1.0.16.tgz#210e61b6ff181de91ea9b3d1b84fdedd47e034e5"
+  integrity sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==
 
 fastq@^1.6.0:
   version "1.17.1"

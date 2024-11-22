@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card">
-      <Button class="mb-2">افزودن بنر جدید</Button>
+      <Button as="router-link" to="/banners/add" class="mb-2">افزودن بنر جدید</Button>
       <DataTable :loading="loading" :value="banners" dir="rtl" tableStyle="min-width: 50rem">
         <Column field="imageName" header="عکس">
           <template #body="slotProps">
@@ -22,7 +22,7 @@
         <Column field="id" header="عملیات">
           <template #body="slotProps">
             <div class="flex gap-2">
-              <Button severity="info" as="router-link" label="ویرایش" :to="`/banners/edit/${slotProps.data.id}`" /> 
+              <Button severity="info" as="router-link" label="ویرایش" :to="`/banners/edit/${slotProps.data.id}`" />
               <Button severity="danger">حذف</Button>
             </div>
           </template>
