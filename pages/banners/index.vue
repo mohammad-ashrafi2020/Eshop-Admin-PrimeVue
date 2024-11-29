@@ -23,7 +23,7 @@
           <template #body="slotProps">
             <div class="flex gap-2">
               <Button severity="info" as="router-link" label="ویرایش" :to="`/banners/edit/${slotProps.data.id}`" />
-              <Button severity="danger">حذف</Button>
+              <Button @click=openDeleteDialog(slotProps.data.id) severity="danger">حذف</Button>
             </div>
           </template>
 
@@ -34,18 +34,38 @@
 </template>
 
 <script lang="ts" setup>
+import { usePrimeFunctions } from '~/composables/usePrimeFunctions';
 import type { Banner } from '~/models/banners/Banner';
-import { GetBanners } from '~/services/banner.service';
+import { DeleteBanner, GetBanners } from '~/services/banner.service';
 import { GetBannerPositonName } from '~/utils/EnumConvertor';
 import { BannerImageUrl } from '~/utils/ImagePath';
 const banners: Ref<Banner[]> = ref([])
 const loading = ref(true);
+const primeFunctions = usePrimeFunctions();
+
+const selectedItem = ref(0);
+
+const deleteFunction = async () => {
+  var res = await DeleteBanner(selectedItem.value);
+  if (res.isSuccess) {
+    banners.value = banners.value.filter(f => f.id != selectedItem.value);
+    selectedItem.value = 0;
+    primeFunctions.successToast();
+  }
+}
+const openDeleteDialog = (id: number) => {
+  selectedItem.value = id;
+  primeFunctions.deleteDialog(undefined, undefined, deleteFunction)
+}
 onMounted(async () => {
+  await getData();
+});
+const getData = async () => {
   loading.value = true;
   var res = await GetBanners();
   loading.value = false;
   banners.value = res.data ?? [];
-});
+}
 definePageMeta({
   title: "مدیریت بنر ها"
 })

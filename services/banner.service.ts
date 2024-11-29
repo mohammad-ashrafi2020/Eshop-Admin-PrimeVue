@@ -17,3 +17,8 @@ export const CreateBanner = (command: CreateBannerCommand) => {
     body: data,
   });
 };
+export const DeleteBanner = (id: number) => {
+  return CustomFetch("/Banner/" + id, {
+    method: "DELETE",
+  });
+};

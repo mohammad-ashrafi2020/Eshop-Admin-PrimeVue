@@ -4,7 +4,7 @@ import type { LoginData } from "~/models/auth/LoginData";
 export const useAccountStore = defineStore("account", () => {
   const toast = useToast();
   const tokenCookieName = "auth-token";
-
+  
   const getToken = computed(() => {
     return useCookie(tokenCookieName).value;
   });
