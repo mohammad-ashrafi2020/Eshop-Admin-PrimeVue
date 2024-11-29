@@ -1,7 +1,7 @@
 import { BannerPosition } from "~/models/banners/Banner";
 
 export const GetBannerPositonName = (position: BannerPosition) => {
-  switch (position) {
+  switch (position.toString()) {
     case BannerPosition.بالای_اسلایدر:
       return "بالای اسلایدر";
     case BannerPosition.زیر_اسلایدر:

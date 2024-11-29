@@ -1,17 +1,13 @@
 <template>
   <div class="card-body">
     <Form :validation-schema="schema" @submit="submited">
+      {{ data }}
       <div class="flex gap-3">
         <BaseInputText v-model="data.link" class="w-1/2" label="آدرس اینترنتی" type="url" name="url" />
-        <Select class="w-1/2" v-model="selectedPosition" :options="positions" optionLabel="name"
-          placeholder="انتخاب مکان بنر" />
+        <BaseSelectBox v-model="data.position" label="مکان قرارگیری" class="w-1/2" name="position"
+          :options="positions" />
       </div>
-      <div class="card flex flex-col items-center gap-6 mt-8">
-        <FileUpload choose-label="انتخاب عکس بنر" mode="basic" @select="onFileSelect" customUpload auto
-          severity="secondary" class="p-button-outlined" />
-        <img v-if="src" :src="src" alt="Image" class="shadow-md rounded-xl max-w-[400px]"
-          style="filter: grayscale(100%)" />
-      </div>
+      <BaseUploadFile v-model="data.imageFile" />
       <div class="flex w-full justify-end">
         <Button :loading="loading" type="submit">ثبت بنر</Button>
       </div>
@@ -29,27 +25,14 @@ import { SuccessOperation } from '~/utils/DefaultMessages';
 import { GetBannerPositonName } from '~/utils/EnumConvertor';
 const loading = ref(false);
 
-const selectedPosition = ref()
 const positions = ref([
-  { name: GetBannerPositonName(BannerPosition.بالای_اسلایدر), value: BannerPosition.بالای_اسلایدر },
-  { name: GetBannerPositonName(BannerPosition.زیر_اسلایدر), value: BannerPosition.زیر_اسلایدر },
-  { name: GetBannerPositonName(BannerPosition.سمت_راست_شگفت_انگیز), value: BannerPosition.سمت_راست_شگفت_انگیز },
-  { name: GetBannerPositonName(BannerPosition.سمت_چپ_اسلایدر), value: BannerPosition.سمت_چپ_اسلایدر },
-  { name: GetBannerPositonName(BannerPosition.وسط_صفحه), value: BannerPosition.وسط_صفحه },
+  { name: GetBannerPositonName(BannerPosition.بالای_اسلایدر), value: BannerPosition.بالای_اسلایدر.toString() },
+  { name: GetBannerPositonName(BannerPosition.زیر_اسلایدر), value: BannerPosition.زیر_اسلایدر.toString() },
+  { name: GetBannerPositonName(BannerPosition.سمت_راست_شگفت_انگیز), value: BannerPosition.سمت_راست_شگفت_انگیز.toString() },
+  { name: GetBannerPositonName(BannerPosition.سمت_چپ_اسلایدر), value: BannerPosition.سمت_چپ_اسلایدر.toString() },
+  { name: GetBannerPositonName(BannerPosition.وسط_صفحه), value: BannerPosition.وسط_صفحه.toString() },
 ]);
-const src = ref('');
-const onFileSelect = (event: any) => {
-  const file = event.files[0];
-  data.imageFile = file;
-  const reader = new FileReader();
 
-  reader.onload = async (e) => {
-    //@ts-ignore
-    src.value = e.target.result;
-  };
-
-  reader.readAsDataURL(file);
-}
 const data = reactive<CreateBannerCommand>({
   link: "",
   imageFile: null,
@@ -59,13 +42,15 @@ const toast = useToast();
 const router = useRouter();
 const schema = Yup.object().shape({
   url: Yup.string().required().url().label("آدرس اینترنتی"),
-  // position: Yup.string().required()
+  position: Yup.string().required().label("مکان قرارگیری")
 });
 
 const submited = async () => {
   if (!data.imageFile) {
     toast.add({
-      summary: "عکس را انتخاب کنید"
+      summary: "عکس را انتخاب کنید",
+      severity: 'error',
+      life: 10000
     });
     return;
   }
@@ -73,7 +58,9 @@ const submited = async () => {
   var result = await CreateBanner(data);
   if (result.isSuccess) {
     toast.add({
-      summary: SuccessOperation
+      summary: SuccessOperation,
+      life: 10000,
+      severity: 'success'
     });
     router.push('/banners')
   }

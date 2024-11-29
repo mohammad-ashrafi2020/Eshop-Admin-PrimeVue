@@ -1,7 +1,8 @@
 <template>
   <div>
     <FloatLabel variant="on">
-      <InputText class="w-full" :type="type" @blur="(e) => handleBlur(e)" @change="(e) => handleChange(e)" :invalid="meta.valid == false"
+      <InputText class="w-full" :type="type" 
+      @blur="(e) => handleBlur(e)" @change="(e) => handleChange(e)" :invalid="meta.valid == false"
         :id="id" v-model="model" :name="name" :placeholder="placeholder" />
       <label :for="id">{{ label }}</label>
     </FloatLabel>
