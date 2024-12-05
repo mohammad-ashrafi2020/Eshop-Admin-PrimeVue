@@ -5,19 +5,22 @@
         class="p-button-outlined" :accept="accept" />
       <Button @click="remove" v-if="model" severity="danger" label="حدف فایل" />
     </div>
-    <img v-if="src" :src="src" alt="Image" class="shadow-md rounded-xl max-w-[400px]" style="filter: grayscale(100%)" />
+    <img v-if="src" :src="src" alt="Image" 
+    class="shadow-md rounded-xl max-w-[400px]" />
   </div>
 </template>
 
 <script lang="ts" setup>
-const src = ref('');
 const model = defineModel({
-  type: Blob || null
+  type: Blob || null,
 });
-const { Chooselabel = "انتخاب عکس", accept = "image/*" } = defineProps<{
+const { Chooselabel = "انتخاب عکس", accept = "image/*", defaultSrc = '' } = defineProps<{
   Chooselabel?: string,
   accept?: string,
+  defaultSrc?: string
 }>();
+const src = ref(defaultSrc);
+
 const onFileSelect = (event: any) => {
   const file = event.files[0];
   model.value = file;

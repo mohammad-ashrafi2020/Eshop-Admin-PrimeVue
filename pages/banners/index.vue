@@ -5,7 +5,7 @@
       <DataTable :loading="loading" :value="banners" dir="rtl" tableStyle="min-width: 50rem">
         <Column field="imageName" header="عکس">
           <template #body="slotProps">
-            <img :src="BannerImageUrl(slotProps.data.imageName)" :alt="slotProps.data.image"
+            <img :src="GetBannerImageUrl(slotProps.data.imageName)" :alt="slotProps.data.image"
               class="w-[200px] rounded" />
           </template>
         </Column>
@@ -22,7 +22,7 @@
         <Column field="id" header="عملیات">
           <template #body="slotProps">
             <div class="flex gap-2">
-              <Button severity="info" as="router-link" label="ویرایش" :to="`/banners/edit/${slotProps.data.id}`" />
+              <Button severity="info" as="router-link" label="ویرایش" :to="`/banners/edit-${slotProps.data.id}`" />
               <Button @click=openDeleteDialog(slotProps.data.id) severity="danger">حذف</Button>
             </div>
           </template>
@@ -38,7 +38,7 @@ import { usePrimeFunctions } from '~/composables/usePrimeFunctions';
 import type { Banner } from '~/models/banners/Banner';
 import { DeleteBanner, GetBanners } from '~/services/banner.service';
 import { GetBannerPositonName } from '~/utils/EnumConvertor';
-import { BannerImageUrl } from '~/utils/ImagePath';
+import { GetBannerImageUrl } from '~/utils/ImagePath';
 const banners: Ref<Banner[]> = ref([])
 const loading = ref(true);
 const primeFunctions = usePrimeFunctions();
