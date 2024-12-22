@@ -5,6 +5,8 @@
         <BaseInputText v-model="data.title" class="w-1/2 sm:w-full" label="عنوان دسته بندی" name="title" />
         <BaseInputText v-model="data.slug" class="w-1/2 sm:w-full" label="slug" name="slug" />
       </div>
+      <hr class="my-5" />
+      <BaseSeoDataForm v-model="data.seoData" />
       <BaseUploadFile v-model="data.imageFile" />
       <div class="flex w-full justify-end">
         <Button :loading="loading" type="submit">ثبت اطلاعات</Button>
@@ -27,7 +29,7 @@ const data = reactive<CreateCategoryCommand>({
   imageFile: null,
   seoData: {
     canonical: "",
-    indexPage: true,
+    indexPage: 'true',
     metaDescription: "",
     metaKeyWords: "",
     metaTitle: ""

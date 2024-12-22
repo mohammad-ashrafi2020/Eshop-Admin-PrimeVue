@@ -1,7 +1,7 @@
 export interface SeoData {
-  metaTitle: string | null;
-  metaDescription: string | null;
-  metaKeyWords: string | null;
-  indexPage: boolean;
-  canonical: string | null;
+  metaTitle: string |undefined;
+  metaDescription: string | undefined;
+  metaKeyWords: string | undefined;
+  indexPage: string | undefined;
+  canonical: string | undefined;
 }
