@@ -15,11 +15,11 @@
           <template #body="slotProps">
             <ul>
               <div class="flex items-center gap-2 mb-2" v-for="item in slotProps.data.childs" :key="item.id">
-               <div class="w-[5px] h-[5px] bg-black rounded-full"></div>
+                <div class="w-[5px] h-[5px] bg-black rounded-full"></div>
                 <p>{{ item.title }}</p>
                 <Button size="small" severity="info" as="router-link" label="ویرایش"
-                  :to="`/banners/edit-${slotProps.data.id}`" />
-                <Button size="small" @click=openDeleteDialog(slotProps.data.id) severity="danger">حذف</Button>
+                  :to="`/banners/edit-${item.id}`" />
+                <Button size="small" @click=openDeleteDialog(item.id) severity="danger">حذف</Button>
               </div>
             </ul>
           </template>
@@ -27,9 +27,10 @@
         <Column field="id" header="عملیات">
           <template #body="slotProps">
             <div class="flex gap-2">
-              <Button size="small" severity="info" as="router-link" label="ویرایش" :to="`/banners/edit-${slotProps.data.id}`" />
-              <Button size="small"  as="router-link" label="افزودن زیر گروه" 
-              :to="`/categories/add?parentId=${slotProps.data.id}`" />
+              <Button size="small" severity="info" as="router-link" label="ویرایش"
+                :to="`/banners/edit-${slotProps.data.id}`" />
+              <Button size="small" as="router-link" label="افزودن زیر گروه"
+                :to="`/categories/add?parentId=${slotProps.data.id}`" />
               <Button size="small" @click=openDeleteDialog(slotProps.data.id) severity="danger">حذف</Button>
             </div>
           </template>
@@ -42,10 +43,8 @@
 <script lang="ts" setup>
 import { usePrimeFunctions } from '~/composables/usePrimeFunctions';
 import type { Category } from '~/models/categories/Category';
-import { DeleteBanner, GetBanners } from '~/services/banner.service';
-import { GetCategories } from '~/services/category.service';
-import { GetBannerPositonName } from '~/utils/EnumConvertor';
-import { GetBannerImageUrl, GetCategoryImageUrl } from '~/utils/ImagePath';
+import { DeleteCategory, GetCategories } from '~/services/category.service';
+import { GetCategoryImageUrl } from '~/utils/ImagePath';
 const data: Ref<Category[]> = ref([])
 const loading = ref(true);
 const primeFunctions = usePrimeFunctions();
@@ -53,9 +52,9 @@ const primeFunctions = usePrimeFunctions();
 const selectedItem = ref(0);
 
 const deleteFunction = async () => {
-  var res = await DeleteBanner(selectedItem.value);
+  var res = await DeleteCategory(selectedItem.value);
   if (res.isSuccess) {
-    data.value = data.value.filter(f => f.id != selectedItem.value);
+    await getData();
     selectedItem.value = 0;
     primeFunctions.successToast();
   }

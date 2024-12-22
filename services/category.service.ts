@@ -5,7 +5,11 @@ import { CustomFetch } from "~/utils/CustomFetch";
 export const GetCategories = () => {
   return CustomFetch<Category[]>("/Category");
 };
-
+export const DeleteCategory = (categoryId: number) => {
+  return CustomFetch("/Category/" + categoryId, {
+    method: "DELETE",
+  });
+};
 export const CreateCategory = (command: CreateCategoryCommand) => {
   var data = new FormData();
 
