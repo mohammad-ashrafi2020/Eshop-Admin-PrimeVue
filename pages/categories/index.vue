@@ -27,8 +27,10 @@
         <Column field="id" header="عملیات">
           <template #body="slotProps">
             <div class="flex gap-2">
-              <Button severity="info" as="router-link" label="ویرایش" :to="`/banners/edit-${slotProps.data.id}`" />
-              <Button @click=openDeleteDialog(slotProps.data.id) severity="danger">حذف</Button>
+              <Button size="small" severity="info" as="router-link" label="ویرایش" :to="`/banners/edit-${slotProps.data.id}`" />
+              <Button size="small"  as="router-link" label="افزودن زیر گروه" 
+              :to="`/categories/add?parentId=${slotProps.data.id}`" />
+              <Button size="small" @click=openDeleteDialog(slotProps.data.id) severity="danger">حذف</Button>
             </div>
           </template>
         </Column>
