@@ -17,8 +17,9 @@
               <div class="flex items-center gap-2 mb-2" v-for="item in slotProps.data.childs" :key="item.id">
                 <div class="w-[5px] h-[5px] bg-black rounded-full"></div>
                 <p>{{ item.title }}</p>
-                <Button size="small" severity="info" as="router-link" label="ویرایش"
-                  :to="`/banners/edit-${item.id}`" />
+                <Button size="small" 
+                severity="info" as="router-link" label="ویرایش" 
+                :to="`/categories/edit?id=${item.id}`" />
                 <Button size="small" @click=openDeleteDialog(item.id) severity="danger">حذف</Button>
               </div>
             </ul>
@@ -28,7 +29,7 @@
           <template #body="slotProps">
             <div class="flex gap-2">
               <Button size="small" severity="info" as="router-link" label="ویرایش"
-                :to="`/banners/edit-${slotProps.data.id}`" />
+                :to="`/categories/edit?id=${slotProps.data.id}`" />
               <Button size="small" as="router-link" label="افزودن زیر گروه"
                 :to="`/categories/add?parentId=${slotProps.data.id}`" />
               <Button size="small" @click=openDeleteDialog(slotProps.data.id) severity="danger">حذف</Button>

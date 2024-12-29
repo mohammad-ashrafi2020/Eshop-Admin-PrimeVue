@@ -1,9 +1,15 @@
 import type { Category } from "~/models/categories/Category";
-import type { CreateCategoryCommand } from "~/models/categories/CreateCategoryCommand";
+import type {
+  CreateCategoryCommand,
+  EditCategoryCommand,
+} from "~/models/categories/CreateCategoryCommand";
 import { CustomFetch } from "~/utils/CustomFetch";
 
 export const GetCategories = () => {
   return CustomFetch<Category[]>("/Category");
+};
+export const GetCategoryById = (id: number) => {
+  return CustomFetch<Category>("/Category/" + id);
 };
 export const DeleteCategory = (categoryId: number) => {
   return CustomFetch("/Category/" + categoryId, {
@@ -64,6 +70,37 @@ export const AddChildCategory = (command: CreateCategoryCommand) => {
 
   return CustomFetch("/Category/AddChild", {
     method: "POST",
+    body: data,
+  });
+};
+export const EditCategory = (command: EditCategoryCommand) => {
+  var data = new FormData();
+
+  data.append("Id", command.id.toString());
+  data.append("Slug", command.slug);
+  data.append("Title", command.title);
+  if(command.imageFile){
+    data.append("ImageFile", command.imageFile);
+  }
+
+  if (command.seoData.metaTitle) {
+    data.append("SeoData.MetaTitle", command.seoData.metaTitle);
+  }
+  if (command.seoData.canonical) {
+    data.append("SeoData.Canonical", command.seoData.canonical);
+  }
+  if (command.seoData.metaKeyWords) {
+    data.append("SeoData.MetaKeyWords", command.seoData.metaKeyWords);
+  }
+  if (command.seoData.metaDescription) {
+    data.append("SeoData.MetaDescription", command.seoData.metaDescription);
+  }
+  if (command.seoData.indexPage) {
+    data.append("SeoData.IndexPage", command.seoData.indexPage.toString());
+  }
+
+  return CustomFetch("/Category", {
+    method: "PUT",
     body: data,
   });
 };

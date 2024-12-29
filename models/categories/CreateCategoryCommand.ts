@@ -7,3 +7,11 @@ export interface CreateCategoryCommand {
   imageFile: any | undefined;
   seoData: SeoData;
 }
+
+export interface EditCategoryCommand {
+  id: number;
+  slug: string;
+  title: string;
+  imageFile: any | undefined;
+  seoData: SeoData;
+}
