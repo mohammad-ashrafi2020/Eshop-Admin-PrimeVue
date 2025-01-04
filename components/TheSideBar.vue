@@ -17,6 +17,10 @@
         <i class="pi pi-users"></i>
         مدیریت کاربران
       </NuxtLink>
+      <NuxtLink to="/comments" class="link">
+        <i class="pi pi-comments"></i>
+        مدیریت نظرات
+      </NuxtLink>
     </div>
   </aside>
 </template>
@@ -58,7 +62,8 @@ defineProps<{
 .link i {
   font-size: 20px;
 }
-.link.router-link-exact-active{
+
+.link.router-link-exact-active {
   @apply bg-primary-100;
 }
 </style>

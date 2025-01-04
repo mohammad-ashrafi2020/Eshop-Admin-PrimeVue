@@ -1,4 +1,5 @@
 import { BannerPosition } from "~/models/banners/Banner";
+import type { UserRecommendedStatus } from "~/models/comments/Comment";
 
 export const GetBannerPositonName = (position: BannerPosition) => {
   switch (position.toString()) {
@@ -12,6 +13,21 @@ export const GetBannerPositonName = (position: BannerPosition) => {
       return "سمت چپ اسلایدر";
     case BannerPosition.وسط_صفحه:
       return "وسط صفحه";
+    default:
+      return "";
+  }
+};
+
+export const GetUserRecommendedStatusName = (
+  enumData: UserRecommendedStatus
+) => {
+  switch (enumData) {
+    case 0:
+      return "پیشنهاد میکنم";
+    case 1:
+      return "پیشنهاد نمی کنم";
+    case 2:
+      return "مطمئن نیستم";
     default:
       return "";
   }
