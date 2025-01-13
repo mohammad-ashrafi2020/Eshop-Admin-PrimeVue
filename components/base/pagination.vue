@@ -2,7 +2,7 @@
   <div>
 
 
-    <div class="flex flex-wrap justify-center sm:flex-col-reverse">
+    <div class="flex gap-1 flex-wrap justify-center sm:flex-col-reverse">
       <Select class="sm:w-full" v-model="take" :options="[{
         label: '5',
         value: 5
@@ -25,14 +25,16 @@
         value: 35
       }]" optionLabel="label" placeholder="تعداد نمایش" />
       <div class="flex flex-wrap justify-center">
-        <div>
-          <Button rounded text icon="pi pi-angle-double-right"></Button>
-          <Button rounded text icon="pi pi-angle-right"></Button>
+        <div v-if="filterResult.currentPage > 1">
+          <Button @click="goFirstPage" rounded text icon="pi pi-angle-double-right"></Button>
+          <Button @click="prev" rounded text icon="pi pi-angle-right"></Button>
         </div>
-        <Button v-for="item in [1, 2, 3, 4, 5]" :label="item.toString()" severity="secondary" text aria-label="Star" />
-        <div>
-          <Button text severity="contrast" rounded icon="pi pi-angle-double-left"></Button>
-          <Button text severity="contrast" rounded icon="pi pi-angle-left"></Button>
+        <Button @click="currentPageModel = item" v-for="item in generatePages()" :label="item.toString()"
+          :severity="item == filterResult.currentPage ? 'green' : 'secondary'" :text="item != filterResult.currentPage"
+          aria-label="Star" />
+        <div v-if="filterResult.currentPage < filterResult.pageCount">
+          <Button @click="goLastPage" text severity="contrast" rounded icon="pi pi-angle-double-left"></Button>
+          <Button @click="next" text severity="contrast" rounded icon="pi pi-angle-left"></Button>
         </div>
       </div>
     </div>
@@ -40,11 +42,45 @@
 </template>
 
 <script lang="ts" setup>
+import type { FilterResult } from '~/models/Filterresult';
 
-const take = ref({
-  label: '15',
-  value: 15
+const currentPageModel = defineModel({
+  type: Number,
+  required: true
 });
+const emits = defineEmits(['changeTake']);
+const { filterResult } = defineProps<{
+  filterResult: FilterResult<any>
+}>()
+const take = ref({
+  label: filterResult.take.toString(),
+  value: filterResult.take
+});
+const generatePages = () => {
+  var pages = [];
+  for (var i = filterResult.startPage; i <= filterResult.endPage; i++) {
+    pages.push(i);
+  }
+  return pages;
+}
+watch(take, (val) => {
+  emits('changeTake', val.value)
+});
+
+const next = () => {
+  currentPageModel.value += 1;
+}
+const prev = () => {
+  currentPageModel.value -= 1;
+
+}
+const goFirstPage = () => {
+  currentPageModel.value = 1;
+}
+const goLastPage = () => {
+  currentPageModel.value = filterResult.pageCount;
+
+}
 </script>
 
 <style></style>

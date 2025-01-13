@@ -1,4 +1,4 @@
-import type { CommentFilterParams } from "~/models/comments/Comment";
+import type { Comment, CommentFilterParams } from "~/models/comments/Comment";
 import type { FilterResult } from "~/models/Filterresult";
 import { CustomFetch } from "~/utils/CustomFetch";
 
