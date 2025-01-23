@@ -1,5 +1,6 @@
 import { BannerPosition } from "~/models/banners/Banner";
 import type { UserRecommendedStatus } from "~/models/comments/Comment";
+import type { OrderStatus } from "~/models/orders/orderListData";
 
 export const GetBannerPositonName = (position: BannerPosition) => {
   switch (position.toString()) {
@@ -30,5 +31,17 @@ export const GetUserRecommendedStatusName = (
       return "مطمئن نیستم";
     default:
       return "";
+  }
+};
+export const GetOrderStatusName = (enumData: OrderStatus) => {
+  switch (enumData) {
+    case 0:
+      return "درانتظار پرداخت";
+    case 1:
+      return "پرداخت شده";
+    case 2:
+      return "در حال ارسال";
+    default:
+      return "رد شده";
   }
 };

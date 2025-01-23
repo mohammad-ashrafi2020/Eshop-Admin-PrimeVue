@@ -153,13 +153,13 @@ const openDialog = (comment: any) => {
 }
 const changeStatus = async () => {
   if (selectedComment.value) {
-    var res = await changeCommentStatus(selectedComment.value.id, Number(selectedStatus.value));
+    var selected = Number(selectedStatus.value);
+    var res = await changeCommentStatus(selectedComment.value.id, selected);
     if (res.isSuccess) {
-      selectedComment.value.status = parseInt(selectedStatus.value);
+      selectedComment.value.status = selected
       primeFunctions.successToast();
-      getData();
+      // isOpenDialog.value = false;
     }
-    // isOpenDialog.value = false;
   }
 }
 </script>

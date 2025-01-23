@@ -17,6 +17,10 @@
         <i class="pi pi-users"></i>
         مدیریت کاربران
       </NuxtLink>
+      <NuxtLink to="/orders" class="link">
+        <i class="pi pi-shopping-bag"></i>
+        مدیریت سفارشات
+      </NuxtLink>
       <NuxtLink to="/comments" class="link">
         <i class="pi pi-comments"></i>
         مدیریت نظرات
