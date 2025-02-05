@@ -14,3 +14,8 @@ export const getOrders = (filterParams: OrderFilterParams) => {
 export const getOrderById = (id: number) => {
   return CustomFetch<OrderData>("/order/" + id);
 };
+export const SendOrder = (id: number) => {
+  return CustomFetch<OrderData>("/order/SendOrder/" + id, {
+    method: "PUT",
+  });
+};

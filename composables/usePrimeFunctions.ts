@@ -1,5 +1,5 @@
 import { useUtilStore } from "~/stores/util.store";
-import { SuccessOperation } from "~/utils/DefaultMessages";
+import { ErrorOperation, SuccessOperation } from "~/utils/DefaultMessages";
 
 export const usePrimeFunctions = () => {
   var dialog = useConfirm();
@@ -39,5 +39,12 @@ export const usePrimeFunctions = () => {
       severity: "success",
     });
   };
-  return { deleteDialog, successToast };
+  const errorToast = (title: string = ErrorOperation) => {
+    toast.add({
+      summary: title,
+      life: 5000,
+      severity: "error",
+    });
+  };
+  return { deleteDialog, successToast,errorToast };
 };

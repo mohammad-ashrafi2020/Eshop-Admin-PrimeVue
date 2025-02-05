@@ -36,7 +36,8 @@
     </div>
     <h3 class="mt-5 mb-2 font-bold text-lg">محصولات</h3>
     <div class=" " v-if="data.data.items">
-      <div class="flex gap-2 items-center  bg-white justify-between rounded shadow mb-2 p-2" v-for="item in data.data.items" :key="item.id">
+      <div class="flex gap-2 items-center  bg-white justify-between rounded shadow mb-2 p-2"
+        v-for="item in data.data.items" :key="item.id">
         <div class="flex gap-1 items-center">
           <img class="w-[50px] object-cover h-[50px] rounded-md" :src="GetProductImageUrl(item.productImageName)" />
           <p>{{ item.productTitle }}</p>
@@ -47,21 +48,38 @@
           <p> جمع مبلغ : <b>{{ item.totalPrice.toLocaleString() }}</b> تومان</p>
         </div>
       </div>
-
     </div>
+    <Button :loading="loading" v-if="data!.data.status == OrderStatus.Finally" severity="warn"
+      @click="sendOrderForUser">سفارش برای مشتری
+      ارسال شد</Button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { getOrderById } from '~/services/order.service';
+import { getOrderById, SendOrder } from '~/services/order.service';
 import { GetOrderStatusName } from '~/utils/EnumConvertor';
 import { toPersianDate } from "~/utils/dateUtil"
 import { GetProductImageUrl } from "~/utils/ImagePath"
+import { OrderStatus } from '~/models/orders/orderListData';
+import { usePrimeFunctions } from '~/composables/usePrimeFunctions';
 const route = useRoute();
 const router = useRouter();
 const orderId = route.query.id;
+const functions = usePrimeFunctions();
 
 const { data, status } = await useAsyncData("order-" + orderId, () => getOrderById(Number(orderId)))
+if (!data.value || data.value.isSuccess == false || !data.value.data) {
+  if (process.client) {
+    router.push('/orders');
+    functions.errorToast();
+  } else {
+    throw createError({
+      statusCode: 404,
+      message: "NotFound"
+    })
+  }
+}
+const loading = ref(false);
 
 definePageMeta({
   title: "نمایش سفارش",
@@ -75,6 +93,15 @@ definePageMeta({
     },
   ]
 });
+const sendOrderForUser = async () => {
+  loading.value = true;
+  var result = await SendOrder(Number(orderId));
+  if (result.isSuccess) {
+    data.value!.data.status = OrderStatus.Shipping;
+    functions.successToast();
+  }
+  loading.value = false;
+}
 </script>
 
 <style></style>
