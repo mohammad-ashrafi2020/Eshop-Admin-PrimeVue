@@ -7,3 +7,6 @@ export const GetBannerImageUrl = (imageName: string) => {
 export const GetCategoryImageUrl = (imageName: string) => {
   return `${BASE_URL}/images/categories/${imageName}`;
 };
+export const GetProductImageUrl = (imageName: string) => {
+  return `${BASE_URL}/images/products/${imageName}`;
+};

@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="card">
-      <DataTable :loading="loading" dir="rtl" :value="orderFilterResult?.data" 
-      >
+      <DataTable :loading="loading" dir="rtl" :value="orderFilterResult?.data">
         <Column field="id" header="#"></Column>
         <Column field="userFullName" header="نام و نام خانوادگی"></Column>
         <Column field="shire" header="استان - شهر">
@@ -29,7 +28,8 @@
         <Column field="id" header="عملیات">
           <template #body="slotProps">
             <div class="flex gap-2">
-              <Button size="small" severity="info" label="نمایش"></Button>
+              <Button as="router-link" :to="`/orders/show?id=${slotProps.data.id}`" size="small" severity="info"
+                label="نمایش"></Button>
               <Button size="small" severity="danger">حذف</Button>
             </div>
           </template>
