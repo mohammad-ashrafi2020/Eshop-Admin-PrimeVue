@@ -13,9 +13,9 @@
         <i class="pi pi-book"></i>
         مدیریت دسته بندی ها
       </NuxtLink>
-      <NuxtLink to="/users" class="link">
-        <i class="pi pi-users"></i>
-        مدیریت کاربران
+      <NuxtLink to="/products" class="link">
+        <i class="pi pi-book"></i>
+        مدیریت محصولات
       </NuxtLink>
       <NuxtLink to="/orders" class="link">
         <i class="pi pi-shopping-bag"></i>
