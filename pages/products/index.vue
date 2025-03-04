@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="card">
+      <Button as="router-link" to="/products/add" class="mb-2">افزودن محصول جدید</Button>
       <DataTable :loading="loading" dir="rtl" :value="comments?.data" tableStyle="min-width: 50rem">
         <Column field="id" header="id"></Column>
         <Column field="imageName" header="عکس">
@@ -58,7 +59,7 @@ onMounted(async () => {
 })
 
 definePageMeta({
-  title: "مدیریت نظرات",
+  title: "مدیریت محصولات",
 });
 const openDeleteDialog = (comment: ProductFilterItem) => {
   selectedComment.value = comment;

@@ -4,9 +4,9 @@ export interface CreateProductCommand {
   title: string;
   imageFile: any;
   description: string;
-  categoryId: number;
-  subCategoryId: number;
-  secondarySubCategoryId: number;
+  categoryId: string;
+  subCategoryId: string;
+  secondarySubCategoryId: string | undefined;
   slug: string;
   seoData: SeoData;
   specifications: string;
