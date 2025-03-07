@@ -13,6 +13,8 @@
       </div>
       <BaseTextArea v-model="data.description" class="w-full " label="توضیحات محصول" name="description" />
       <hr class="my-5" />
+      <ProductsSpecifications @row-count="(newVal) => rowCount = newVal" />
+      <hr class="my-5" />
       <BaseSeoDataForm v-model="data.seoData" />
       <BaseUploadFile v-model="data.imageFile" />
       <div class="flex w-full justify-end">
@@ -31,6 +33,7 @@ import type { CreateCategoryCommand } from '~/models/categories/CreateCategoryCo
 import type { CreateProductCommand } from '~/models/products/CreateProductCommand';
 import { AddChildCategory, CreateCategory, GetCategories } from '~/services/category.service';
 const loading = ref(false);
+const rowCount = ref(1);
 
 const data = reactive<CreateProductCommand>({
   slug: "",
@@ -61,6 +64,8 @@ const schema = Yup.object().shape({
 });
 
 const submited = async () => {
+  var specification = getSpecificationValue();
+  console.log(specification);
   if (!data.imageFile) {
     toast.add({
       summary: "عکس را انتخاب کنید",
@@ -74,6 +79,21 @@ const submited = async () => {
   // 
 
   loading.value = false;
+}
+const getSpecificationValue = () => {
+  let result = [];
+  for (let i = 1; i <= rowCount.value; i++) {
+    let titleInput = document.querySelector(`input[name=t-${i}]`);
+    let valueInput = document.querySelector(`input[name=v-${i}]`);
+
+    if (titleInput && valueInput) {
+      if (!titleInput.value) {
+        continue;
+      }
+      result.push({ [titleInput.value]: valueInput.value });
+    }
+  }
+  return JSON.stringify(result);
 }
 definePageMeta({
   title: "افزودن محصول",
