@@ -32,6 +32,7 @@ import type { Category } from '~/models/categories/Category';
 import type { CreateCategoryCommand } from '~/models/categories/CreateCategoryCommand';
 import type { CreateProductCommand } from '~/models/products/CreateProductCommand';
 import { AddChildCategory, CreateCategory, GetCategories } from '~/services/category.service';
+import { CreateProduct } from '~/services/product.service';
 const loading = ref(false);
 const rowCount = ref(1);
 
@@ -48,11 +49,9 @@ const data = reactive<CreateProductCommand>({
   },
   categoryId: "0",
   subCategoryId: "0",
-  secondarySubCategoryId: undefined,
   description: "",
   specifications: ""
 });
-const toast = useToast();
 const router = useRouter();
 const route = useRoute();
 const categories: Ref<Category[]> = ref([]);
@@ -64,24 +63,22 @@ const schema = Yup.object().shape({
 });
 
 const submited = async () => {
-  var specification = getSpecificationValue();
-  console.log(specification);
   if (!data.imageFile) {
-    toast.add({
-      summary: "عکس را انتخاب کنید",
-      severity: 'error',
-      life: 10000
-    });
+    functions.errorToast("عکس را انتخاب کنید");
     return;
   }
   loading.value = true;
-
+  data.specifications = getSpecificationValue();
+  var result = await CreateProduct(data);
+  if (result.isSuccess) {
+    functions.successToast("محصول با موفقیت اضافه شد");
+    router.push('/products');
+  }
   // 
-
   loading.value = false;
 }
 const getSpecificationValue = () => {
-  let result = [];
+  let result = {};
   for (let i = 1; i <= rowCount.value; i++) {
     let titleInput = document.querySelector(`input[name=t-${i}]`);
     let valueInput = document.querySelector(`input[name=v-${i}]`);
@@ -90,7 +87,8 @@ const getSpecificationValue = () => {
       if (!titleInput.value) {
         continue;
       }
-      result.push({ [titleInput.value]: valueInput.value });
+      //@ts-ignore
+      result[titleInput.value] = valueInput.value;
     }
   }
   return JSON.stringify(result);

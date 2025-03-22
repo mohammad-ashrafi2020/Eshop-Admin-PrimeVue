@@ -6,7 +6,6 @@ export interface CreateProductCommand {
   description: string;
   categoryId: string;
   subCategoryId: string;
-  secondarySubCategoryId: string | undefined;
   slug: string;
   seoData: SeoData;
   specifications: string;

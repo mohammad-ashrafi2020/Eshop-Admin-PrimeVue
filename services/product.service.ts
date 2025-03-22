@@ -18,10 +18,6 @@ export const CreateProduct = (command: CreateProductCommand) => {
   data.append("Description", command.description);
   data.append("CategoryId", command.categoryId.toString());
   data.append("SubCategoryId", command.subCategoryId.toString());
-  data.append(
-    "SecondarySubCategoryId",
-    command.secondarySubCategoryId.toString()
-  );
   data.append("Slug", command.slug);
   if (command.seoData.metaTitle) {
     data.append("SeoData.MetaTitle", command.seoData.metaTitle);
