@@ -14,7 +14,7 @@
         <Column field="id" header="عملیات">
           <template #body="slotProps">
             <div class="flex gap-2">
-              <Button @click="openDialog(slotProps.data)" size="small" severity="info" label="نمایش"></Button>
+              <Button as="router-link" :to="`/products/edit-${slotProps.data.id}`" severity="info" label="ویرایش"/>
               <Button size="small" @click="openDeleteDialog(slotProps.data)" severity="danger">حذف</Button>
             </div>
           </template>
@@ -88,22 +88,7 @@ const changeTake = (newTake: number) => {
   filterParams.pageId = 1;
   filterParams.take = newTake;
 }
-const openDialog = (comment: any) => {
-  selectedComment.value = comment;
-  selectedStatus.value = comment.status.toString();
-  isOpenDialog.value = true;
-}
-const changeStatus = async () => {
-  // if (selectedComment.value) {
-  //   var selected = Number(selectedStatus.value);
-  //   var res = await changeCommentStatus(selectedComment.value.id, selected);
-  //   if (res.isSuccess) {
-  //     selectedComment.value.status = selected
-  //     primeFunctions.successToast();
-  //     // isOpenDialog.value = false;
-  //   }
-  // }
-}
+
 </script>
 
 <style></style>

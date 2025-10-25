@@ -3,11 +3,50 @@ import type { FilterResult } from "~/models/Filterresult";
 import type { ProductFilterParams } from "~/models/products/ProductFilterItem";
 import { CustomFetch } from "~/utils/CustomFetch";
 import type { CreateProductCommand } from "~/models/products/CreateProductCommand";
+import type { Product } from "~/models/products/Product";
+import type { EditProductCommand } from "~/models/products/EditProductCommand";
 
 export const GetProductsByFilter = (filterparams: ProductFilterParams) => {
   return CustomFetch<FilterResult<ProductFilterItem>>("/product", {
     method: "GET",
     query: filterparams,
+  });
+};
+export const GetProductById = (id: number) => {
+  return CustomFetch<Product>("/product/" + id, {
+    method: "GET",
+  });
+};
+export const EditProduct = (command: EditProductCommand) => {
+  var data = new FormData();
+  data.append("ProductId", command.productId.toString());
+  data.append("Title", command.title);
+  if (command.imageFile) {
+    data.append("ImageFile", command.imageFile);
+  }
+  data.append("Description", command.description);
+  data.append("CategoryId", command.categoryId.toString());
+  data.append("SubCategoryId", command.subCategoryId.toString());
+  data.append("Slug", command.slug);
+  if (command.seoData.metaTitle) {
+    data.append("SeoData.MetaTitle", command.seoData.metaTitle);
+  }
+  if (command.seoData.canonical) {
+    data.append("SeoData.Canonical", command.seoData.canonical);
+  }
+  if (command.seoData.metaKeyWords) {
+    data.append("SeoData.MetaKeyWords", command.seoData.metaKeyWords);
+  }
+  if (command.seoData.metaDescription) {
+    data.append("SeoData.MetaDescription", command.seoData.metaDescription);
+  }
+  if (command.seoData.indexPage) {
+    data.append("SeoData.IndexPage", command.seoData.indexPage.toString());
+  }
+  data.append("Specifications", command.specifications);
+  return CustomFetch("/product", {
+    method: "PUT",
+    body: data,
   });
 };
 
